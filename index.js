@@ -1,9 +1,16 @@
 var drums = document.querySelectorAll(".drum");
 
+// main
 for (let i = 0; i < drums.length; i++) {
     drums[i].addEventListener("click", function() {
         var drumInnerHTML = this.innerHTML;
-        switch (drumInnerHTML) {
+        buttonAnimation(drumInnerHTML);
+        drumSound(drumInnerHTML);
+    })
+}
+
+function drumSound(drumInnerHTML) {
+    switch (drumInnerHTML) {
             case "w":
                 var audio = new Audio("sounds/tom-1.mp3");
                 audio.play();
@@ -33,8 +40,16 @@ for (let i = 0; i < drums.length; i++) {
                 audio.play();
                 break;
             default:
+                console.log(drumInnerHTML);
         }
-    })
+}
+
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function() {
+        activeButton.classList.remove("pressed");
+    }, 100);
 }
 
 
